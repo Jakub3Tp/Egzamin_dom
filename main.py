@@ -1,5 +1,7 @@
 import sys
 from random import randint
+
+from PyQt6.QtSql import password
 from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox
 
 from layout import Ui_Dialog
@@ -44,10 +46,11 @@ class MyForm(QDialog):
     def message(self):
         name = self.ui.name.text()
         surname = self.ui.surname.text()
-        status = self.ui.status.text()
+        status = str(self.ui.status.currentText())
+        password = password()
 
         message = QMessageBox()
-        message.setText(f'{name}, {surname}, {status}')
+        message.setText(f'{name}, {surname}, {status}, {pas}')
         message.exec()
 
 if __name__ == '__main__':
