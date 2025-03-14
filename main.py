@@ -1,7 +1,6 @@
 import sys
 from random import randint
 
-from PyQt6.QtSql import password
 from PyQt6.QtWidgets import QDialog, QApplication, QMessageBox
 
 from layout import Ui_Dialog
@@ -14,11 +13,12 @@ class MyForm(QDialog):
         self.ui.setupUi(self)
         self.ui.generate.clicked.connect(self.generate_password)
         self.ui.save.clicked.connect(self.message)
+        self.pass_word = ''
         self.show()
 
     def generate_password(self):
         password = int(self.ui.numberOf.text())
-        pass_word = ''
+        self.pass_word = ''
 
         set_of_lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
         set_of_uppercase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','G','R','S','T','U','V','W','X','Y','Z']
@@ -27,30 +27,29 @@ class MyForm(QDialog):
 
         for i in range(password):
             randomLower = randint(0, len(set_of_lowercase)-1)
-            pass_word += set_of_lowercase[randomLower]
+            self.pass_word += set_of_lowercase[randomLower]
 
         if self.ui.bigSmall.isChecked():
             randomUpper = randint(0, len(set_of_uppercase) - 1)
-            pass_word = set_of_uppercase[randomUpper] + pass_word
+            self.pass_word = set_of_uppercase[randomUpper] + self.pass_word
 
         if self.ui.numbers.isChecked():
             randomNumber = randint(0, len(set_of_digits) - 1)
-            pass_word = set_of_digits[randomNumber] + pass_word
+            self.pass_word = set_of_digits[randomNumber] + self.pass_word
 
         if self.ui.special.isChecked():
             randomSpecial = randint(0, len(set_of_special) - 1)
-            pass_word = set_of_special[randomSpecial] + pass_word
+            self.pass_word = set_of_special[randomSpecial] + self.pass_word
 
-        print(pass_word)
+        print(self.pass_word)
 
     def message(self):
         name = self.ui.name.text()
         surname = self.ui.surname.text()
         status = str(self.ui.status.currentText())
-        password = password()
 
         message = QMessageBox()
-        message.setText(f'{name}, {surname}, {status}, {pas}')
+        message.setText(f'{name}, {surname}, {status}, {self.pass_word}')
         message.exec()
 
 if __name__ == '__main__':
