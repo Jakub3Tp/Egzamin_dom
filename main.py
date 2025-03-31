@@ -27,7 +27,7 @@ class MyForm(QDialog):
 
         for i in range(password):
             randomLower = randint(0, len(set_of_lowercase)-1)
-            self.pass_word += set_of_lowercase[randomLower]
+            self.pass_word = set_of_lowercase[randomLower] + self.pass_word
 
         if self.ui.bigSmall.isChecked():
             randomUpper = randint(0, len(set_of_uppercase) - 1)
