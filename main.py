@@ -49,7 +49,7 @@ class MyForm(QDialog):
         status = str(self.ui.status.currentText())
 
         message = QMessageBox()
-        message.setText(f'{name}, {surname}, {status}, {self.pass_word}')
+        message.setText(f'{name} {surname}, {status}, {self.pass_word}')
         message.exec()
 
 if __name__ == '__main__':
